@@ -1,0 +1,1408 @@
+Type: AWS::Lambda::Function
+Properties: 
+  FunctionName: bfs-etl-s3-to-sql
+  MemorySize: 10240
+  Timeout: 600
+Type: AWS::Lambda::Function
+Properties: 
+  FunctionName: bfs-etl-process-diaglog
+  MemorySize: 481
+  Timeout: 900
+Type: AWS::Lambda::Function
+Properties: 
+  FunctionName: bfs-sql-sync
+  MemorySize: 8192
+  Timeout: 900
+Deployment: ebs-csi-controller
+ClusterName: rcp
+NameSpace: ebs-driver
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  ebs-plugin:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 104079360
+    memoryLimitValue: !<MemoryValue>
+      value: 1.0407936E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "99.26 MiB"
+      humanReadableRepresentation: "99.26 MiB"
+    memoryRequestBytes: 21017927.41899679601192474365234375
+    memoryRequestValue: !<MemoryValue>
+      value: 2.1017927418996796E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "20.04 MiB"
+      humanReadableRepresentation: "20.04 MiB"
+  csi-resizer:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 49438720
+    memoryLimitValue: !<MemoryValue>
+      value: 4.943872E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "47.15 MiB"
+      humanReadableRepresentation: "47.15 MiB"
+    memoryRequestBytes: 24719360
+    memoryRequestValue: !<MemoryValue>
+      value: 2.471936E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "23.57 MiB"
+      humanReadableRepresentation: "23.57 MiB"
+  csi-attacher:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 60784640
+    memoryLimitValue: !<MemoryValue>
+      value: 6.078464E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "57.97 MiB"
+      humanReadableRepresentation: "57.97 MiB"
+    memoryRequestBytes: 15745773.301693342626094818115234375
+    memoryRequestValue: !<MemoryValue>
+      value: 1.5745773301693343E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "15.02 MiB"
+      humanReadableRepresentation: "15.02 MiB"
+  liveness-probe:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 63180800
+    memoryLimitValue: !<MemoryValue>
+      value: 6.31808E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "60.25 MiB"
+      humanReadableRepresentation: "60.25 MiB"
+    memoryRequestBytes: 31590400
+    memoryRequestValue: !<MemoryValue>
+      value: 3.15904E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "30.13 MiB"
+      humanReadableRepresentation: "30.13 MiB"
+  csi-provisioner:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 87408640
+    memoryLimitValue: !<MemoryValue>
+      value: 8.740864E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "83.36 MiB"
+      humanReadableRepresentation: "83.36 MiB"
+    memoryRequestBytes: 17532985.894193612039089202880859375
+    memoryRequestValue: !<MemoryValue>
+      value: 1.7532985894193612E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "16.72 MiB"
+      humanReadableRepresentation: "16.72 MiB"
+  csi-snapshotter:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 32614400
+    memoryLimitValue: !<MemoryValue>
+      value: 3.26144E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "31.1 MiB"
+      humanReadableRepresentation: "31.1 MiB"
+    memoryRequestBytes: 14941488.2290780842304229736328125
+    memoryRequestValue: !<MemoryValue>
+      value: 1.4941488229078084E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "14.25 MiB"
+      humanReadableRepresentation: "14.25 MiB"
+
+Deployment: kubernetes-sidecar-injector
+ClusterName: rcp
+NameSpace: sidecar-injector
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  kubernetes-sidecar-injector:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 40002560
+    memoryLimitValue: !<MemoryValue>
+      value: 4.000256E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "38.15 MiB"
+      humanReadableRepresentation: "38.15 MiB"
+    memoryRequestBytes: 20001280
+    memoryRequestValue: !<MemoryValue>
+      value: 2.000128E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "19.07 MiB"
+      humanReadableRepresentation: "19.07 MiB"
+
+Deployment: ebs-csi-controller
+ClusterName: rcp
+NameSpace: ebs-driver
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  csi-resizer:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 49387520
+    memoryLimitValue: !<MemoryValue>
+      value: 4.938752E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "47.1 MiB"
+      humanReadableRepresentation: "47.1 MiB"
+    memoryRequestBytes: 24693760
+    memoryRequestValue: !<MemoryValue>
+      value: 2.469376E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "23.55 MiB"
+      humanReadableRepresentation: "23.55 MiB"
+  liveness-probe:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 63179093.33333337306976318359375
+    memoryLimitValue: !<MemoryValue>
+      value: 6.317909333333337E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "60.25 MiB"
+      humanReadableRepresentation: "60.25 MiB"
+    memoryRequestBytes: 31589546.666666686534881591796875
+    memoryRequestValue: !<MemoryValue>
+      value: 3.1589546666666687E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "30.13 MiB"
+      humanReadableRepresentation: "30.13 MiB"
+  csi-attacher:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 60549120
+    memoryLimitValue: !<MemoryValue>
+      value: 6.054912E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "57.74 MiB"
+      humanReadableRepresentation: "57.74 MiB"
+    memoryRequestBytes: 15637163.71957320161163806915283203125
+    memoryRequestValue: !<MemoryValue>
+      value: 1.5637163719573202E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "14.91 MiB"
+      humanReadableRepresentation: "14.91 MiB"
+  ebs-plugin:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 104079360
+    memoryLimitValue: !<MemoryValue>
+      value: 1.0407936E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "99.26 MiB"
+      humanReadableRepresentation: "99.26 MiB"
+    memoryRequestBytes: 20789951.1777252070605754852294921875
+    memoryRequestValue: !<MemoryValue>
+      value: 2.0789951177725207E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "19.83 MiB"
+      humanReadableRepresentation: "19.83 MiB"
+  csi-provisioner:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 80583680
+    memoryLimitValue: !<MemoryValue>
+      value: 8.058368E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "76.85 MiB"
+      humanReadableRepresentation: "76.85 MiB"
+    memoryRequestBytes: 17597680.448646657168865203857421875
+    memoryRequestValue: !<MemoryValue>
+      value: 1.7597680448646657E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "16.78 MiB"
+      humanReadableRepresentation: "16.78 MiB"
+  csi-snapshotter:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 32469333.33333332836627960205078125
+    memoryLimitValue: !<MemoryValue>
+      value: 3.246933333333333E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "30.97 MiB"
+      humanReadableRepresentation: "30.97 MiB"
+    memoryRequestBytes: 14836466.4574373923242092132568359375
+    memoryRequestValue: !<MemoryValue>
+      value: 1.4836466457437392E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "14.15 MiB"
+      humanReadableRepresentation: "14.15 MiB"
+
+Deployment: rcp-aws-pvc-tagger
+ClusterName: rcp
+NameSpace: runtime
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  rcp-aws-pvc-tagger:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 60477440
+    memoryLimitValue: !<MemoryValue>
+      value: 6.047744E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "57.68 MiB"
+      humanReadableRepresentation: "57.68 MiB"
+    memoryRequestBytes: 30238720
+    memoryRequestValue: !<MemoryValue>
+      value: 3.023872E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "28.84 MiB"
+      humanReadableRepresentation: "28.84 MiB"
+
+Deployment: federated-aws-node-termination-handler
+ClusterName: rcp
+NameSpace: runtime
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  aws-node-termination-handler:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 71403520
+    memoryLimitValue: !<MemoryValue>
+      value: 7.140352E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "68.1 MiB"
+      humanReadableRepresentation: "68.1 MiB"
+    memoryRequestBytes: 22571507.56182444095611572265625
+    memoryRequestValue: !<MemoryValue>
+      value: 2.257150756182444E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "21.53 MiB"
+      humanReadableRepresentation: "21.53 MiB"
+
+Deployment: cluster-autoscaler
+ClusterName: rcp
+NameSpace: cluster-autoscaler
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  aws-cluster-autoscaler:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 2951331840
+    memoryLimitValue: !<MemoryValue>
+      value: 2.95133184E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "2.75 GiB"
+      humanReadableRepresentation: "2.75 GiB"
+    memoryRequestBytes: 1475665920
+    memoryRequestValue: !<MemoryValue>
+      value: 1.47566592E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "1.37 GiB"
+      humanReadableRepresentation: "1.37 GiB"
+
+Deployment: metrics-server
+ClusterName: rcp
+NameSpace: metrics-server
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  metrics-server:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 552347306.66666615009307861328125
+    memoryLimitValue: !<MemoryValue>
+      value: 5.523473066666662E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "526.76 MiB"
+      humanReadableRepresentation: "526.76 MiB"
+    memoryRequestBytes: 276173653.333333075046539306640625
+    memoryRequestValue: !<MemoryValue>
+      value: 2.761736533333331E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "263.38 MiB"
+      humanReadableRepresentation: "263.38 MiB"
+
+Deployment: kserve-controller-manager
+ClusterName: rcp
+NameSpace: kserve
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  kube-rbac-proxy:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 19256320
+    memoryLimitValue: !<MemoryValue>
+      value: 1.925632E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "18.36 MiB"
+      humanReadableRepresentation: "18.36 MiB"
+    memoryRequestBytes: 9760615.457228243350982666015625
+    memoryRequestValue: !<MemoryValue>
+      value: 9760615.457228243
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "9.31 MiB"
+      humanReadableRepresentation: "9.31 MiB"
+
+Deployment: aws-eks-asg-rolling-update-handler
+ClusterName: rcp
+NameSpace: eks-rolling-update
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  aws-eks-asg-rolling-update-handler:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 99276800
+    memoryLimitValue: !<MemoryValue>
+      value: 9.92768E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "94.68 MiB"
+      humanReadableRepresentation: "94.68 MiB"
+    memoryRequestBytes: 28388784.0276389829814434051513671875
+    memoryRequestValue: !<MemoryValue>
+      value: 2.8388784027638983E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "27.07 MiB"
+      humanReadableRepresentation: "27.07 MiB"
+
+Deployment: kubernetes-replicator
+ClusterName: rcp
+NameSpace: runtime
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  kubernetes-replicator:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 755528960
+    memoryLimitValue: !<MemoryValue>
+      value: 7.5552896E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "720.53 MiB"
+      humanReadableRepresentation: "720.53 MiB"
+    memoryRequestBytes: 65438439.694674499332904815673828125
+    memoryRequestValue: !<MemoryValue>
+      value: 6.54384396946745E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "62.41 MiB"
+      humanReadableRepresentation: "62.41 MiB"
+
+Deployment: cert-manager-webhook
+ClusterName: rcp
+NameSpace: cert-manager
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cert-manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 36602880
+    memoryLimitValue: !<MemoryValue>
+      value: 3.660288E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "34.91 MiB"
+      humanReadableRepresentation: "34.91 MiB"
+    memoryRequestBytes: 17707170.902788221836090087890625
+    memoryRequestValue: !<MemoryValue>
+      value: 1.770717090278822E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "16.89 MiB"
+      humanReadableRepresentation: "16.89 MiB"
+
+Deployment: open-policy-agent
+ClusterName: rcp
+NameSpace: opa
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  open-policy-agent:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 158394026.666666686534881591796875
+    memoryLimitValue: !<MemoryValue>
+      value: 1.583940266666667E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "151.06 MiB"
+      humanReadableRepresentation: "151.06 MiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+  kube-mgmt:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 216867840
+    memoryLimitValue: !<MemoryValue>
+      value: 2.1686784E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "206.82 MiB"
+      humanReadableRepresentation: "206.82 MiB"
+    memoryRequestBytes: 31452871.210748948156833648681640625
+    memoryRequestValue: !<MemoryValue>
+      value: 3.145287121074895E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "30 MiB"
+      humanReadableRepresentation: "30 MiB"
+
+Deployment: federated-teleport
+ClusterName: rcp
+NameSpace: teleport-agent
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  teleport:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 488765440
+    memoryLimitValue: !<MemoryValue>
+      value: 4.8876544E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "466.12 MiB"
+      humanReadableRepresentation: "466.12 MiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
+Deployment: federated-cert-exporter-cert-manager
+ClusterName: rcp
+NameSpace: cert-exporter
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cert-exporter:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 73262080
+    memoryLimitValue: !<MemoryValue>
+      value: 7.326208E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "69.87 MiB"
+      humanReadableRepresentation: "69.87 MiB"
+    memoryRequestBytes: 23126428.32325263321399688720703125
+    memoryRequestValue: !<MemoryValue>
+      value: 2.3126428323252633E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "22.06 MiB"
+      humanReadableRepresentation: "22.06 MiB"
+
+Deployment: cluster-autoscaler
+ClusterName: rcp
+NameSpace: cluster-autoscaler
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  aws-cluster-autoscaler:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 2951331840
+    memoryLimitValue: !<MemoryValue>
+      value: 2.95133184E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "2.75 GiB"
+      humanReadableRepresentation: "2.75 GiB"
+    memoryRequestBytes: 1475665920
+    memoryRequestValue: !<MemoryValue>
+      value: 1.47566592E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "1.37 GiB"
+      humanReadableRepresentation: "1.37 GiB"
+
+Deployment: efs-csi-controller
+ClusterName: rcp
+NameSpace: efs-driver
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  efs-plugin:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 85007360
+    memoryLimitValue: !<MemoryValue>
+      value: 8.500736E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "81.07 MiB"
+      humanReadableRepresentation: "81.07 MiB"
+    memoryRequestBytes: 38676258.21314878761768341064453125
+    memoryRequestValue: !<MemoryValue>
+      value: 3.867625821314879E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "36.88 MiB"
+      humanReadableRepresentation: "36.88 MiB"
+  liveness-probe:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 58543786.66666662693023681640625
+    memoryLimitValue: !<MemoryValue>
+      value: 5.854378666666663E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "55.83 MiB"
+      humanReadableRepresentation: "55.83 MiB"
+    memoryRequestBytes: 29271893.333333313465118408203125
+    memoryRequestValue: !<MemoryValue>
+      value: 2.9271893333333313E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "27.92 MiB"
+      humanReadableRepresentation: "27.92 MiB"
+  csi-provisioner:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 51170986.66666662693023681640625
+    memoryLimitValue: !<MemoryValue>
+      value: 5.117098666666663E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "48.8 MiB"
+      humanReadableRepresentation: "48.8 MiB"
+    memoryRequestBytes: 18503008.2041188441216945648193359375
+    memoryRequestValue: !<MemoryValue>
+      value: 1.8503008204118844E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "17.65 MiB"
+      humanReadableRepresentation: "17.65 MiB"
+
+Deployment: federated-aws-load-balancer-controller
+ClusterName: rcp
+NameSpace: aws-load-balancer-system
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  aws-load-balancer-controller:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 1055284906.66666698455810546875
+    memoryLimitValue: !<MemoryValue>
+      value: 1.055284906666667E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "1006.4 MiB"
+      humanReadableRepresentation: "1006.4 MiB"
+    memoryRequestBytes: 527642453.333333492279052734375
+    memoryRequestValue: !<MemoryValue>
+      value: 5.276424533333335E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "503.2 MiB"
+      humanReadableRepresentation: "503.2 MiB"
+
+Deployment: vault-agent-injector
+ClusterName: rcp
+NameSpace: vault
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  sidecar-injector:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 31083520
+    memoryLimitValue: !<MemoryValue>
+      value: 3.108352E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "29.64 MiB"
+      humanReadableRepresentation: "29.64 MiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
+Deployment: vault-role-manager
+ClusterName: rcp
+NameSpace: vault
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  vault-role-manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 24934400
+    memoryLimitValue: !<MemoryValue>
+      value: 2.49344E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "23.78 MiB"
+      humanReadableRepresentation: "23.78 MiB"
+    memoryRequestBytes: 12624470.21008071862161159515380859375
+    memoryRequestValue: !<MemoryValue>
+      value: 1.2624470210080719E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "12.04 MiB"
+      humanReadableRepresentation: "12.04 MiB"
+
+Deployment: datadog-cluster-agent
+ClusterName: rcp
+NameSpace: datadog
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cluster-agent:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 5747487857.77777576446533203125
+    memoryLimitValue: !<MemoryValue>
+      value: 5.747487857777776E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "5.35 GiB"
+      humanReadableRepresentation: "5.35 GiB"
+    memoryRequestBytes: 319304870.604881823062896728515625
+    memoryRequestValue: !<MemoryValue>
+      value: 3.193048706048818E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "304.51 MiB"
+      humanReadableRepresentation: "304.51 MiB"
+
+Deployment: kserve-controller-manager
+ClusterName: rcp
+NameSpace: kserve
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 1336401920
+    memoryLimitValue: !<MemoryValue>
+      value: 1.33640192E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "1.24 GiB"
+      humanReadableRepresentation: "1.24 GiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+  kube-rbac-proxy:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: null
+    memoryLimitValue: null
+    memoryRequestBytes: 9824333.60191583447158336639404296875
+    memoryRequestValue: !<MemoryValue>
+      value: 9824333.601915834
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "9.37 MiB"
+      humanReadableRepresentation: "9.37 MiB"
+
+Deployment: vault-secrets-operator
+ClusterName: rcp
+NameSpace: vault
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  vault-secrets-operator:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 605528746.6666662693023681640625
+    memoryLimitValue: !<MemoryValue>
+      value: 6.055287466666663E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "577.48 MiB"
+      humanReadableRepresentation: "577.48 MiB"
+    memoryRequestBytes: 63911365.36838360130786895751953125
+    memoryRequestValue: !<MemoryValue>
+      value: 6.39113653683836E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "60.95 MiB"
+      humanReadableRepresentation: "60.95 MiB"
+
+Deployment: vault-secrets-operator
+ClusterName: rcp
+NameSpace: vault
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  vault-secrets-operator:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 605528746.6666662693023681640625
+    memoryLimitValue: !<MemoryValue>
+      value: 6.055287466666663E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "577.48 MiB"
+      humanReadableRepresentation: "577.48 MiB"
+    memoryRequestBytes: 64869927.47993351519107818603515625
+    memoryRequestValue: !<MemoryValue>
+      value: 6.4869927479933515E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "61.86 MiB"
+      humanReadableRepresentation: "61.86 MiB"
+
+Deployment: federated-aws-node-termination-handler
+ClusterName: rcp
+NameSpace: runtime
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  aws-node-termination-handler:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 68394666.66666662693023681640625
+    memoryLimitValue: !<MemoryValue>
+      value: 6.839466666666663E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "65.23 MiB"
+      humanReadableRepresentation: "65.23 MiB"
+    memoryRequestBytes: 22291766.0942395888268947601318359375
+    memoryRequestValue: !<MemoryValue>
+      value: 2.229176609423959E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "21.26 MiB"
+      humanReadableRepresentation: "21.26 MiB"
+
+Deployment: plugin-configmap-webhook
+ClusterName: rcp
+NameSpace: runtime
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  webhook:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 25369600
+    memoryLimitValue: !<MemoryValue>
+      value: 2.53696E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "24.19 MiB"
+      humanReadableRepresentation: "24.19 MiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
+Deployment: vault-role-manager
+ClusterName: rcp
+NameSpace: vault
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  vault-role-manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 17930240
+    memoryLimitValue: !<MemoryValue>
+      value: 1.793024E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "17.1 MiB"
+      humanReadableRepresentation: "17.1 MiB"
+    memoryRequestBytes: 12598400.55120199732482433319091796875
+    memoryRequestValue: !<MemoryValue>
+      value: 1.2598400551201997E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "12.01 MiB"
+      humanReadableRepresentation: "12.01 MiB"
+
+Deployment: kiali-operator
+ClusterName: rcp
+NameSpace: kiali-operator
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  operator:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 11989299200
+    memoryLimitValue: !<MemoryValue>
+      value: 1.19892992E10
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "11.17 GiB"
+      humanReadableRepresentation: "11.17 GiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
+Deployment: cert-manager-webhook
+ClusterName: rcp
+NameSpace: cert-manager
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cert-manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 36597760
+    memoryLimitValue: !<MemoryValue>
+      value: 3.659776E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "34.9 MiB"
+      humanReadableRepresentation: "34.9 MiB"
+    memoryRequestBytes: 17704261.8490371890366077423095703125
+    memoryRequestValue: !<MemoryValue>
+      value: 1.770426184903719E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "16.88 MiB"
+      humanReadableRepresentation: "16.88 MiB"
+
+Deployment: efs-csi-controller
+ClusterName: rcp
+NameSpace: efs-driver
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  liveness-probe:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 58543786.66666662693023681640625
+    memoryLimitValue: !<MemoryValue>
+      value: 5.854378666666663E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "55.83 MiB"
+      humanReadableRepresentation: "55.83 MiB"
+    memoryRequestBytes: 29271893.333333313465118408203125
+    memoryRequestValue: !<MemoryValue>
+      value: 2.9271893333333313E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "27.92 MiB"
+      humanReadableRepresentation: "27.92 MiB"
+  csi-provisioner:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 50875733.33333337306976318359375
+    memoryLimitValue: !<MemoryValue>
+      value: 5.087573333333337E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "48.52 MiB"
+      humanReadableRepresentation: "48.52 MiB"
+    memoryRequestBytes: 18330855.2069049738347530364990234375
+    memoryRequestValue: !<MemoryValue>
+      value: 1.8330855206904974E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "17.48 MiB"
+      humanReadableRepresentation: "17.48 MiB"
+  efs-plugin:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 85113173.3333333432674407958984375
+    memoryLimitValue: !<MemoryValue>
+      value: 8.511317333333334E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "81.17 MiB"
+      humanReadableRepresentation: "81.17 MiB"
+    memoryRequestBytes: 38619581.550330974161624908447265625
+    memoryRequestValue: !<MemoryValue>
+      value: 3.8619581550330974E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "36.83 MiB"
+      humanReadableRepresentation: "36.83 MiB"
+
+Deployment: datadog-cluster-agent
+ClusterName: rcp
+NameSpace: datadog
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cluster-agent:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 3214578346.66666698455810546875
+    memoryLimitValue: !<MemoryValue>
+      value: 3.214578346666667E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "2.99 GiB"
+      humanReadableRepresentation: "2.99 GiB"
+    memoryRequestBytes: 330537985.081950485706329345703125
+    memoryRequestValue: !<MemoryValue>
+      value: 3.305379850819505E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "315.23 MiB"
+      humanReadableRepresentation: "315.23 MiB"
+
+Deployment: open-policy-agent
+ClusterName: rcp
+NameSpace: opa
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  kube-mgmt:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 235837440
+    memoryLimitValue: !<MemoryValue>
+      value: 2.3583744E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "224.91 MiB"
+      humanReadableRepresentation: "224.91 MiB"
+    memoryRequestBytes: 31858992.9741369187831878662109375
+    memoryRequestValue: !<MemoryValue>
+      value: 3.185899297413692E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "30.38 MiB"
+      humanReadableRepresentation: "30.38 MiB"
+  open-policy-agent:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 159527253.333333313465118408203125
+    memoryLimitValue: !<MemoryValue>
+      value: 1.595272533333333E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "152.14 MiB"
+      humanReadableRepresentation: "152.14 MiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
+Deployment: plugin-configmap-webhook
+ClusterName: rcp
+NameSpace: runtime
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  webhook:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 19254613.3333333320915699005126953125
+    memoryLimitValue: !<MemoryValue>
+      value: 1.9254613333333332E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "18.36 MiB"
+      humanReadableRepresentation: "18.36 MiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
+Deployment: rcp-aws-pvc-tagger
+ClusterName: rcp
+NameSpace: runtime
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  rcp-aws-pvc-tagger:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 60436480
+    memoryLimitValue: !<MemoryValue>
+      value: 6.043648E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "57.64 MiB"
+      humanReadableRepresentation: "57.64 MiB"
+    memoryRequestBytes: 30218240
+    memoryRequestValue: !<MemoryValue>
+      value: 3.021824E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "28.82 MiB"
+      humanReadableRepresentation: "28.82 MiB"
+
+Deployment: cert-manager-cainjector
+ClusterName: rcp
+NameSpace: cert-manager
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cert-manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 1758877013.3333337306976318359375
+    memoryLimitValue: !<MemoryValue>
+      value: 1.7588770133333337E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "1.64 GiB"
+      humanReadableRepresentation: "1.64 GiB"
+    memoryRequestBytes: 146279933.2171172201633453369140625
+    memoryRequestValue: !<MemoryValue>
+      value: 1.4627993321711722E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "139.5 MiB"
+      humanReadableRepresentation: "139.5 MiB"
+
+Deployment: metrics-server
+ClusterName: rcp
+NameSpace: metrics-server
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  metrics-server:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 472096426.666666209697723388671875
+    memoryLimitValue: !<MemoryValue>
+      value: 4.720964266666662E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "450.23 MiB"
+      humanReadableRepresentation: "450.23 MiB"
+    memoryRequestBytes: 236048213.3333331048488616943359375
+    memoryRequestValue: !<MemoryValue>
+      value: 2.360482133333331E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "225.11 MiB"
+      humanReadableRepresentation: "225.11 MiB"
+
+Deployment: kubernetes-sidecar-injector
+ClusterName: rcp
+NameSpace: sidecar-injector
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  kubernetes-sidecar-injector:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 40023040
+    memoryLimitValue: !<MemoryValue>
+      value: 4.002304E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "38.17 MiB"
+      humanReadableRepresentation: "38.17 MiB"
+    memoryRequestBytes: 20011520
+    memoryRequestValue: !<MemoryValue>
+      value: 2.001152E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "19.08 MiB"
+      humanReadableRepresentation: "19.08 MiB"
+
+Deployment: provider-aws-60e6e85aa16a
+ClusterName: rcp
+NameSpace: crossplane-system
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  provider-aws:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 1000506026.6666667461395263671875
+    memoryLimitValue: !<MemoryValue>
+      value: 1.0005060266666667E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "954.16 MiB"
+      humanReadableRepresentation: "954.16 MiB"
+    memoryRequestBytes: 500253013.33333337306976318359375
+    memoryRequestValue: !<MemoryValue>
+      value: 5.002530133333334E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "477.08 MiB"
+      humanReadableRepresentation: "477.08 MiB"
+
+Deployment: federated-aws-load-balancer-controller
+ClusterName: rcp
+NameSpace: aws-load-balancer-system
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  aws-load-balancer-controller:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 1172420266.66666698455810546875
+    memoryLimitValue: !<MemoryValue>
+      value: 1.172420266666667E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "1.09 GiB"
+      humanReadableRepresentation: "1.09 GiB"
+    memoryRequestBytes: 586210133.333333492279052734375
+    memoryRequestValue: !<MemoryValue>
+      value: 5.862101333333335E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "559.05 MiB"
+      humanReadableRepresentation: "559.05 MiB"
+
+Deployment: provider-aws-60e6e85aa16a
+ClusterName: rcp
+NameSpace: crossplane-system
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  provider-aws:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 999038293.333333492279052734375
+    memoryLimitValue: !<MemoryValue>
+      value: 9.990382933333335E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "952.76 MiB"
+      humanReadableRepresentation: "952.76 MiB"
+    memoryRequestBytes: 499519146.6666667461395263671875
+    memoryRequestValue: !<MemoryValue>
+      value: 4.9951914666666675E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "476.38 MiB"
+      humanReadableRepresentation: "476.38 MiB"
+
+Deployment: kubernetes-replicator
+ClusterName: rcp
+NameSpace: runtime
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  kubernetes-replicator:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 871331200
+    memoryLimitValue: !<MemoryValue>
+      value: 8.713312E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "830.97 MiB"
+      humanReadableRepresentation: "830.97 MiB"
+    memoryRequestBytes: 67833035.80475701391696929931640625
+    memoryRequestValue: !<MemoryValue>
+      value: 6.783303580475701E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "64.69 MiB"
+      humanReadableRepresentation: "64.69 MiB"
+
+Deployment: cert-manager
+ClusterName: rcp
+NameSpace: cert-manager
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cert-manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 5869967360
+    memoryLimitValue: !<MemoryValue>
+      value: 5.86996736E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "5.47 GiB"
+      humanReadableRepresentation: "5.47 GiB"
+    memoryRequestBytes: 125602903.61750757694244384765625
+    memoryRequestValue: !<MemoryValue>
+      value: 1.2560290361750758E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "119.78 MiB"
+      humanReadableRepresentation: "119.78 MiB"
+
+Deployment: cert-manager-cainjector
+ClusterName: rcp
+NameSpace: cert-manager
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cert-manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 1758877013.3333337306976318359375
+    memoryLimitValue: !<MemoryValue>
+      value: 1.7588770133333337E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "1.64 GiB"
+      humanReadableRepresentation: "1.64 GiB"
+    memoryRequestBytes: 151671933.9446004331111907958984375
+    memoryRequestValue: !<MemoryValue>
+      value: 1.5167193394460043E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "144.65 MiB"
+      humanReadableRepresentation: "144.65 MiB"
+
+Deployment: aws-eks-asg-rolling-update-handler
+ClusterName: rcp
+NameSpace: eks-rolling-update
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  aws-eks-asg-rolling-update-handler:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 104948053.33333335816860198974609375
+    memoryLimitValue: !<MemoryValue>
+      value: 1.0494805333333336E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "100.09 MiB"
+      humanReadableRepresentation: "100.09 MiB"
+    memoryRequestBytes: 28516229.482664339244365692138671875
+    memoryRequestValue: !<MemoryValue>
+      value: 2.851622948266434E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "27.2 MiB"
+      humanReadableRepresentation: "27.2 MiB"
+
+Deployment: vault-agent-injector
+ClusterName: rcp
+NameSpace: vault
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  sidecar-injector:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 31464106.666666664183139801025390625
+    memoryLimitValue: !<MemoryValue>
+      value: 3.1464106666666664E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "30.01 MiB"
+      humanReadableRepresentation: "30.01 MiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
+Deployment: cert-manager
+ClusterName: rcp
+NameSpace: cert-manager
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cert-manager:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 2462883840
+    memoryLimitValue: !<MemoryValue>
+      value: 2.46288384E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "2.29 GiB"
+      humanReadableRepresentation: "2.29 GiB"
+    memoryRequestBytes: 129486150.0607051849365234375
+    memoryRequestValue: !<MemoryValue>
+      value: 1.2948615006070518E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "123.49 MiB"
+      humanReadableRepresentation: "123.49 MiB"
+
+Deployment: federated-cert-exporter-cert-manager
+ClusterName: rcp
+NameSpace: cert-exporter
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  cert-exporter:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 68713813.33333337306976318359375
+    memoryLimitValue: !<MemoryValue>
+      value: 6.871381333333337E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "65.53 MiB"
+      humanReadableRepresentation: "65.53 MiB"
+    memoryRequestBytes: 22947524.6151614487171173095703125
+    memoryRequestValue: !<MemoryValue>
+      value: 2.294752461516145E7
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "21.88 MiB"
+      humanReadableRepresentation: "21.88 MiB"
+
+Deployment: kiali-operator
+ClusterName: rcp
+NameSpace: kiali-operator
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  operator:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 5511374506.66666126251220703125
+    memoryLimitValue: !<MemoryValue>
+      value: 5.511374506666661E9
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "5.13 GiB"
+      humanReadableRepresentation: "5.13 GiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
+Deployment: federated-teleport
+ClusterName: rcp
+NameSpace: teleport-agent
+--- !<KubeResourceConfigState>
+replicas: null
+kubeContainerConfigStateMap:
+  teleport:
+    cpuLimit: null
+    cpuLimitValue: null
+    cpuRequest: null
+    cpuRequestValue: null
+    memoryLimitBytes: 527423146.666666209697723388671875
+    memoryLimitValue: !<MemoryValue>
+      value: 5.274231466666662E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "502.99 MiB"
+      humanReadableRepresentation: "502.99 MiB"
+    memoryRequestBytes: null
+    memoryRequestValue: null
+
