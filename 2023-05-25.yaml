@@ -1,0 +1,36 @@
+Deployment: cert-manager-webhook
+ClusterName: kubernetes-cluster
+NameSpace: cert-manager
+--- !<KubeResourceConfigState>
+replicas: 1
+kubeContainerConfigStateMap:
+  identity:
+    cpuLimit: "1"
+    cpuLimitValue: !<K8sCpuValue>
+      value: 1.0
+      metricUnit: "CORES"
+      machineFriendlyRepresentation: "1000m"
+      humanReadableRepresentation: "1 cores"
+    cpuRequest: "300m"
+    cpuRequestValue: !<K8sCpuValue>
+      value: 300.0
+      metricUnit: "MILLICORES"
+      machineFriendlyRepresentation: "300m"
+      humanReadableRepresentation: "300m"
+    memoryLimitBytes: 524288000
+    memoryLimitValue: !<MemoryValue>
+      value: 5.24288E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "500 MiB"
+      humanReadableRepresentation: "500 MiB"
+    memoryRequestBytes: 419430400
+    memoryRequestValue: !<MemoryValue>
+      value: 4.194304E8
+      metricUnit: "BYTES"
+      machineFriendlyRepresentation: "400 MiB"
+      humanReadableRepresentation: "400 MiB"
+    cpuRequestNotSet: false
+    cpuLimitNotSet: false
+    memoryRequestNotSet: false
+    memoryLimitNotSet: false
+
